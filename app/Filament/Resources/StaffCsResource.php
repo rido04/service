@@ -2,20 +2,19 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\StaffCs;
 use Filament\Forms;
 use Filament\Tables;
-use Filament\Resources\Form;
-use Filament\Resources\Table;
+use App\Models\User;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
 use Filament\Resources\Resource;
-use Filament\Resources\Pages\CreateRecord;
-use Filament\Resources\Pages\EditRecord;
-use Filament\Resources\Pages\ListRecords;
-use Filament\Resources\Pages\ViewRecord;
+use App\Filament\Resources\StaffCsResource\Pages\EditStaffCs;
+use App\Filament\Resources\StaffCsResource\Pages\ListStaffCs;
+use App\Filament\Resources\StaffCsResource\Pages\CreateStaffCs;
 
 class StaffCsResource extends Resource
 {
-    protected static ?string $model = StaffCs::class;
+    protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
@@ -51,14 +50,36 @@ class StaffCsResource extends Resource
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('role'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime(),
+            ])
+            ->filters([
+                Tables\Filters\SelectFilter::make('role')
+                    ->options([
+                        'cs' => 'Customer Service',
+                    ])
+                    ->default('cs')
+                    ->query(function ($query) {
+                        return $query->where('role', 'cs');
+                    }),
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
+            ]);
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListStaffCs::route('/'),
-            'create' => Pages\CreateStaffCs::route('/create'),
-            'edit' => Pages\EditStaffCs::route('/{record}/edit'),
+            'index' => ListStaffCs::route('/'),
+            'create' => CreateStaffCs::route('/create'),
+            'edit' => EditStaffCs::route('/{record}/edit'),
         ];
     }
 }
