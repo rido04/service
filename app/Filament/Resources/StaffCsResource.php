@@ -66,6 +66,7 @@ class StaffCsResource extends Resource
                     }),
             ])
             ->actions([
+                Tables\Actions\CreateAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
