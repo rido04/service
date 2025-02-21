@@ -39,5 +39,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::resource('customer', CustomerController::class)->middleware('auth');
+Route::post('/cs/store', [StaffCsController::class, 'store'])->name('cs.store');
+
 
 require __DIR__.'/auth.php';

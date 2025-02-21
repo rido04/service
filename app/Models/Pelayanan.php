@@ -1,5 +1,14 @@
 <?php
 
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Pelayanan extends Model
+{
+    //
+}
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,7 +20,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('pelayanans', function (Blueprint $table) {
             $table->id();
             $table->string('jenis_pelayanan');
             $table->date('tanggal');
@@ -25,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('pelayanans');
     }
 };
