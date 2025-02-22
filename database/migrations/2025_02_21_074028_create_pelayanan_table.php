@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Jalankan Migrasi
+     * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('pelayanans', function (Blueprint $table) {
+        Schema::create('pelayanan', function (Blueprint $table) {
             $table->id();
             $table->string('jenis_pelayanan');
             $table->date('tanggal');
@@ -20,12 +20,11 @@ return new class extends Migration
         });
     }
 
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('pelayanans');
+        Schema::dropIfExists('pelayanan');
     }
 };
