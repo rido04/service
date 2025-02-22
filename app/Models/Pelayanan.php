@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pelayanan extends Model
 {
-    //
+    protected $fillable = ['id', 'jenis_pelayanan', 'tanggal', 'jam', 'timestamps'];
 }
 
 use Illuminate\Database\Migrations\Migration;
@@ -18,6 +18,8 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+
     public function up(): void
     {
         Schema::create('pelayanans', function (Blueprint $table) {
